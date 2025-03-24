@@ -1,4 +1,4 @@
-# IdeaHub: Turning Ideas Into Reality Through Collaboration
+# Ideahub
 
 IdeaHub is an open-source platform that connects people with great software ideas to developers who can bring them to life. Whether you have an idea but lack the technical skills, or you're a developer looking for exciting projects, IdeaHub makes it easy to collaborate and build something amazing together.
 
