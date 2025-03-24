@@ -9,3 +9,7 @@ Submit your concept and requirements, and connect with developers who can turn y
 Browse a variety of ideas, pick projects that match your skills, and contribute to building real-world software. Build your portfolio, expand your network, and have fun with innovative projects.
 
 IdeaHub is where ideas meet the developers who can make them a reality. Everyone wins through collaboration and innovation.
+
+## License
+
+This project is licensed under the GNU General Public License v3.0. See the LICENSE file for details.
