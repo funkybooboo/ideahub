@@ -47,7 +47,7 @@ jobs:
 
       - name: Generate HTML coverage report
         working-directory: backend
-        run: deno coverage --html=coverage
+        run: deno coverage ./coverage --html
 
       - name: Upload backend coverage report
         uses: actions/upload-artifact@v4
