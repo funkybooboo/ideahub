@@ -1,0 +1,78 @@
+name: CI
+
+# Trigger on pushes or PRs to main, dev, test
+on:
+  push:
+    branches:
+      - main
+      - dev
+      - test
+  pull_request:
+    branches:
+      - main
+      - dev
+      - test
+
+jobs:
+  backend:
+    name: Deno fmt/lint/test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Deno
+        uses: denoland/setup-deno@v1
+        with:
+          deno-version: v1.x
+
+      - name: Cache Deno modules
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/deno
+          key: ${{ runner.os }}-deno-${{ hashFiles('backend/deno.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-deno-
+
+      - name: Run Deno fmt check
+        working-directory: backend
+        run: deno fmt --check
+
+      - name: Run Deno lint
+        working-directory: backend
+        run: deno lint
+
+      - name: Run Deno tests
+        working-directory: backend
+        run: deno test --allow-net --allow-read
+
+  frontend:
+    name: Node.js lint/test
+    runs-on: ubuntu-latest
+    needs: backend
+    strategy:
+      matrix:
+        node-version: [18.x, 20.x]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        working-directory: frontend
+        run: npm ci
+
+      - name: Run Prettier check
+        working-directory: frontend
+        run: npm run format -- --check
+
+      - name: Run ESLint
+        working-directory: frontend
+        run: npm run lint
+
+      - name: Run Vitest
+        working-directory: frontend
+        run: npm run test -- --coverage
