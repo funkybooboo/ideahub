@@ -43,11 +43,11 @@ jobs:
 
       - name: Run Deno tests with coverage
         working-directory: backend
-        run: deno test --allow-net --allow-read --allow-import --coverage
+        run: deno test --allow-net --allow-read --allow-import --coverage=./coverage
 
-      - name: Generate coverage report (HTML)
+      - name: Generate HTML coverage report
         working-directory: backend
-        run: deno coverage --output=./coverage html
+        run: deno coverage --html=coverage
 
       - name: Upload backend coverage report
         uses: actions/upload-artifact@v4
