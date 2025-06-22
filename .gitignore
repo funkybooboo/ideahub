@@ -1,0 +1,52 @@
+# ─── Operating System ─────────────────────────────────────────────────────────
+# macOS
+.DS_Store
+# Windows
+Thumbs.db
+
+# ─── Editor / IDE ─────────────────────────────────────────────────────────────
+# VSCode
+.vscode/
+# JetBrains
+.idea/
+# Vim swap files
+*~
+*.swp
+
+# ─── Environment files ─────────────────────────────────────────────────────────
+# dotenv
+.env
+.env.*.local
+
+# ─── Node.js (frontend) ────────────────────────────────────────────────────────
+# dependencies
+/frontend/node_modules/
+/frontend/.pnp/
+/frontend/.pnp.js
+# build output
+/frontend/dist/
+/frontend/coverage/
+/frontend/npm-debug.log*
+/frontend/yarn-debug.log*
+/frontend/yarn-error.log*
+/frontend/pnpm-debug.log*
+
+# ─── Deno (backend) ────────────────────────────────────────────────────────────
+# any local cache directory you use
+/backend/.cache/
+/backend/.deno/
+/backend/.lock*     # if you’re generating any *.lock files locally
+
+# ─── Logs & Reports ───────────────────────────────────────────────────────────
+# general logs
+logs/
+*.log
+
+# ─── TypeScript / Tooling ─────────────────────────────────────────────────────
+# incremental build info
+*.tsbuildinfo
+
+# ─── Miscellaneous ────────────────────────────────────────────────────────────
+# coverage (if run from project root)
+/coverage/
+/.nyc_output/
