@@ -1,10 +1,10 @@
-// Monkey-patch for SuperDeno in Deno 2: make `window` === `globalThis`
-if (!("window" in globalThis)) {
-  (globalThis as any).window = globalThis;
-}
+// — Monkey-patch for SuperDeno in Deno 2 —
+// we need a global `window` so SuperDeno’s SHAM_SYMBOL plumbing works.
+// deno-lint-ignore no-explicit-any
+(globalThis as any).window = globalThis;
 
 import { assertEquals } from "https://deno.land/std@0.193.0/testing/asserts.ts";
-import { superoak }      from "https://deno.land/x/superoak@4.8.0/mod.ts";
+import { superoak } from "https://deno.land/x/superoak@4.8.0/mod.ts";
 import { createApp, Idea } from "../src/mod.ts";
 
 Deno.test("GET /api/ideas → 200 & empty list", async () => {
@@ -16,17 +16,14 @@ Deno.test("GET /api/ideas → 200 & empty list", async () => {
 Deno.test("POST + GET /api/ideas → persists across requests", async () => {
   const app = createApp();
 
-  // 1) POST a new idea
   const poster = await superoak(app);
   const payload = { title: "Foo", description: "Bar" };
   const postRes = await poster
-      .post("/api/ideas")
-      .send(payload)
-      .expect(201);
-
+    .post("/api/ideas")
+    .send(payload)
+    .expect(201);
   assertEquals(postRes.body, { id: 1, ...payload });
 
-  // 2) GET should now return that idea
   const getter = await superoak(app);
   const getRes = await getter.get("/api/ideas").expect(200);
   assertEquals(getRes.body, [{ id: 1, ...payload }]);

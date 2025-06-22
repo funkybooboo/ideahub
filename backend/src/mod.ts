@@ -21,16 +21,16 @@ export function createApp(): Application {
 
   // Routes
   router
-      .get("/api/ideas", (ctx) => {
-        ctx.response.body = ideas;
-      })
-      .post("/api/ideas", async (ctx) => {
-        const body = await ctx.request.body({ type: "json" }).value;
-        const newIdea: Idea = { id: ideas.length + 1, ...body };
-        ideas.push(newIdea);
-        ctx.response.status = 201;
-        ctx.response.body = newIdea;
-      });
+    .get("/api/ideas", (ctx) => {
+      ctx.response.body = ideas;
+    })
+    .post("/api/ideas", async (ctx) => {
+      const body = await ctx.request.body({ type: "json" }).value;
+      const newIdea: Idea = { id: ideas.length + 1, ...body };
+      ideas.push(newIdea);
+      ctx.response.status = 201;
+      ctx.response.body = newIdea;
+    });
 
   app.use(router.routes());
   app.use(router.allowedMethods());
