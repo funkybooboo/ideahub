@@ -1,6 +1,10 @@
 {
   "importMap": "./import_map.json",
   "tasks": {
-    "start": "deno run --allow-net --allow-read src/mod.ts"
+    "start": "deno run --allow-net --allow-read src/mod.ts",
+    "watch": "deno run --watch --allow-net --allow-read src/mod.ts",
+    "fmt": "deno fmt",
+    "lint": "deno lint",
+    "test": "deno test --allow-net --allow-read"
   }
 }
