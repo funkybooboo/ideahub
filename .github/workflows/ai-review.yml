@@ -1,0 +1,34 @@
+name: AI Code Review
+
+# only on PRs targeting dev or test
+on:
+  pull_request:
+    branches:
+      - dev
+      - test
+    types:
+      - opened
+      - reopened
+      - synchronize
+
+permissions:
+  contents: read      # to read code
+  pull-requests: write  # to post review comments
+
+jobs:
+  ai_review:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Run ChatGPT Code Review
+        uses: anc95/ChatGPT-CodeReview@main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}      # built-in
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}  # you just created
+          # Optional tuning:
+          MODEL: gpt-4                  # or "gpt-3.5-turbo"
+          IGNORE_PATTERNS: "**/*.md,**/*.json"
+          INCLUDE_PATTERNS: "*.ts,*.tsx,*.js"
+
