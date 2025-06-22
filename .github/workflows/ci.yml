@@ -50,7 +50,7 @@ jobs:
         run: deno coverage --output=./coverage html
 
       - name: Upload backend coverage report
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: backend-coverage
           path: backend/coverage
