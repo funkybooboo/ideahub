@@ -15,15 +15,15 @@ on:
 
 jobs:
   backend:
-    name: Deno fmt/lint/test
+    name: Deno fmt/lint/test/coverage
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
-      - name: Setup Deno
+      - name: Setup Deno (>=2.x)
         uses: denoland/setup-deno@v1
         with:
-         deno-version: v2.x
+          deno-version: v2.x
 
       - name: Cache Deno modules
         uses: actions/cache@v3
@@ -41,9 +41,19 @@ jobs:
         working-directory: backend
         run: deno lint
 
-      - name: Run Deno tests
+      - name: Run Deno tests with coverage
         working-directory: backend
-        run: deno test --allow-net --allow-read
+        run: deno test --allow-net --allow-read --allow-import --coverage=./coverage
+
+      - name: Generate HTML coverage report
+        working-directory: backend
+        run: deno coverage ./coverage --html
+
+      - name: Upload backend coverage report
+        uses: actions/upload-artifact@v4
+        with:
+          name: backend-coverage
+          path: backend/coverage
 
   frontend:
     name: Node.js lint/test

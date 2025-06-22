@@ -5,6 +5,6 @@
     "watch": "deno run --watch --allow-net --allow-read src/mod.ts",
     "fmt": "deno fmt",
     "lint": "deno lint",
-    "test": "deno test --allow-net --allow-read"
+    "test": "deno test --allow-net --allow-read --allow-import"
   }
 }
