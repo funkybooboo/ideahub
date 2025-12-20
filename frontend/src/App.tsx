@@ -285,7 +285,7 @@ function App() {
             <span>by {idea.user_name}</span>
             {idea.pledge_amount > 0 && <span>${idea.pledge_amount.toFixed(2)} pledged</span>}
             <span>{idea.comment_count} comments</span>
-            <span>{new Date(idea.created_at).toLocaleDateString()}</span>
+            <span>{new Date(idea.created_at).toLocaleString()}</span>
           </div>
         </div>
 
