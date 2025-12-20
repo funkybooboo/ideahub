@@ -3,7 +3,7 @@ declare module "vite-plugin-eslint" {
 
     /**
      * Minimal typing for vite-plugin-eslint.
-     * `options` is left as `unknown`—you can tighten this if you know the shape.
+     * `options` is left as `unknown` - you can tighten this if you know the shape.
      */
     export default function eslintPlugin(options?: unknown): Plugin;
 }

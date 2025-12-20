@@ -43,7 +43,7 @@ jobs:
 
       - name: Run Deno tests with coverage
         working-directory: backend
-        run: deno test --allow-net --allow-read --allow-import --coverage=./coverage
+        run: deno test --allow-net --allow-read --allow-write --allow-ffi --allow-env --allow-import --coverage=./coverage
 
       - name: Generate HTML coverage report
         working-directory: backend

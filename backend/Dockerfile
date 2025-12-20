@@ -1,7 +1,10 @@
-FROM denoland/deno:1.34.3
+FROM denoland/deno:2.1.4
 
 # create app directory
 WORKDIR /app
+
+# create data directory for SQLite database
+RUN mkdir -p /app/data
 
 # copy config and lock files
 COPY import_map.json deno.json ./
@@ -13,4 +16,4 @@ COPY src/ src/
 EXPOSE 8000
 
 # run the server
-CMD ["deno", "run", "--import-map=import_map.json", "--allow-net", "--allow-read", "src/mod.ts"]
+CMD ["deno", "run", "--import-map=import_map.json", "--allow-net", "--allow-read", "--allow-write", "--allow-ffi", "--allow-env", "src/mod.ts"]

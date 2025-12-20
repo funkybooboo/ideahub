@@ -50,3 +50,11 @@ logs/
 # coverage (if run from project root)
 /coverage/
 /.nyc_output/
+
+# ─── Database ────────────────────────────────────────────────────────────────
+# SQLite database files
+/backend/*.db
+/backend/*.db-journal
+/backend/*.db-wal
+/backend/*.db-shm
+/backend/data/

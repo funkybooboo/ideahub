@@ -1,5 +1,5 @@
-// — Monkey-patch for SuperDeno in Deno 2 —
-// we need a global `window` so SuperDeno’s SHAM_SYMBOL plumbing works.
+// Monkey-patch for SuperDeno in Deno 2
+// we need a global `window` so SuperDeno's SHAM_SYMBOL plumbing works.
 // deno-lint-ignore no-explicit-any
 (globalThis as any).window = globalThis;
 
@@ -7,13 +7,13 @@ import { assertEquals } from "https://deno.land/std@0.193.0/testing/asserts.ts";
 import { superoak } from "https://deno.land/x/superoak@4.8.0/mod.ts";
 import { createApp, Idea } from "../src/mod.ts";
 
-Deno.test("GET /api/ideas → 200 & empty list", async () => {
+Deno.test("GET /api/ideas returns 200 and empty list", async () => {
   const client = await superoak(createApp());
   const res = await client.get("/api/ideas").expect(200);
   assertEquals(res.body, [] as Idea[]);
 });
 
-Deno.test("POST + GET /api/ideas → persists across requests", async () => {
+Deno.test("POST + GET /api/ideas persists across requests", async () => {
   const app = createApp();
 
   const poster = await superoak(app);
